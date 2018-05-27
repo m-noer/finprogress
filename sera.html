@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <title>Todo App</title>
+    <meta charset="utf-8">
+    <!-- <script src="https://unpkg.com/vue"></script> -->
+    <script src="js/vue.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  </head>
+  <body>
+
+
+    <div id="app">
+      <div class="container">
+        <div class="row"></div>
+        <input class="form-control search" type="search" placeholder="search title" v-model="search"/>
+        <div class="book" v-for="b in searchBlog">
+          <h1>{{b.title | toupper }}</h1>
+          <p>{{b.content | snipper }}</p>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+    var bookAry = [
+      {
+        img:'images/profil1.jpg',
+        name: 'Sarah Doe',
+        time: '2 minutes ago',
+        title: 'Jalan Rusak',
+        progress: '0',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      },
+      {
+        img:'images/profil2.jpg',
+        name: 'John Doe',
+        time: '7 minutes ago',
+        title: 'BPJS tidak dilayani',
+        progress: '10',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      },
+      {
+        img:'images/profil3.jpg',
+        name: 'Mei Ling',
+        time: '2 hour ago',
+        title: 'Title Laporin',
+        progress: '7',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      },
+      {
+        img:'images/profil4.jpg',
+        name: 'Sudarmawan',
+        time: '2 day ago',
+        title: 'Title Laporin amikom',
+        progress: '73',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      }
+    ];
+
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        books: bookAry,
+        search: ''
+      },
+      // filters: {
+      //   toupper: function toupper(value) {
+      //     return value.toUpperCase();
+      //   },
+      //   snipper: function snipper(value) {
+      //     return value.slice(0, 150) + '...';
+      //   }
+      // },
+      computed: {
+        searchBlog: function searchBlog() {
+          var _this = this;
+
+          return this.books.filter(function (blog) {
+            return blog.title.toLowerCase().match(_this.search.toLowerCase()) || blog.content.toLowerCase().match(_this.search.toLowerCase());
+          });
+        }
+      }
+    });
+    </script>
+
+  </body>
+</html>
